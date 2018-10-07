@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+    
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            
+            
+            robotArm.loadLevel("exercise 12");
+            
+            
+            robotArm.speed=1000;
+            for(var g = 9; g>0; g= g-1){
+            robotArm.grab();
+            var color = robotArm.scan();
+            if(color == "red"){
+            for(var j = 1; j<=g; j++){
+             robotArm.moveRight();
+            }
+            robotArm.drop();
+            for(var i = 1; i<=g-1; i++){
+            robotArm.moveLeft();
+            }
+            }                      
+            if(color != "red"){
+            robotArm.drop();
+            robotArm.moveRight();
+            }
+            }
+           
+            robotArm.run();
+        </script>
+    </body>
+</html>
